@@ -5,6 +5,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 import { Button } from "@mui/material";
 import AddCustomer from "./AddCustomer";
+import EditCustomer from "./EditCustomer";
 
 function CustomerList() {
 
@@ -24,6 +25,10 @@ function CustomerList() {
         {field: 'city', sortable: true, filter: true, width: '100%'},
         {field: 'email', sortable: true, filter: true},
         {field: 'phone', sortable: true, filter: true},
+        {
+            cellRenderer: params => <EditCustomer updateCustomer={updateCustomer} data={params.data} />,
+            width: 120
+          },
         {
             cellRenderer: params => <Button size="small" onClick={() => deleteCustomer(params.data.links[0].href)}>Delete</Button>,
             width: 120
@@ -69,6 +74,17 @@ function CustomerList() {
         .catch(err => console.error(err))
     }
 
+    const updateCustomer = (customer, link) => {
+        fetch(link, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(customer)
+        })
+        .then(() => fetchCustomers())
+        .catch(err => console.error(err))
+    }
 
     return(
         <>
