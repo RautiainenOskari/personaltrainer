@@ -60,7 +60,7 @@ function CustomerList() {
 
     return(
         <>
-        <div className="ag-theme-material" style= {{ width: '600%', height: 700, margin: 'auto'}}>
+        <div className="ag-theme-material" style= {{ width: '90%', height: 700, margin: 'auto'}}>
         <AgGridReact
             rowData={customers}
             columnDefs={columnDefs}

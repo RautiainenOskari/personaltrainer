@@ -3,6 +3,7 @@ import { useState } from "react";
 import CustomerList from './components/customerlist';
 import Etusivu from './components/Etusivu';
 import TrainingList from './components/Traininglist';
+import dayjs from 'dayjs';
 
 function App() {
   const [selectedTab, setSelectedTab] = useState("home");
@@ -10,6 +11,8 @@ function App() {
   const handleTabChange = (newTab) => {
     setSelectedTab(newTab);
   };
+
+  
 
 
   return (
