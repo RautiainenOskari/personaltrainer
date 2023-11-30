@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 
-import "./Customerlist.css";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 import { Button } from "@mui/material";
+import AddCustomer from "./AddCustomer";
 
 function CustomerList() {
 
@@ -25,7 +25,7 @@ function CustomerList() {
         {field: 'email', sortable: true, filter: true},
         {field: 'phone', sortable: true, filter: true},
         {
-            cellRenderer: params => <Button size="small" onClick={() => deleteCustomer(params.data._links.car.href)}>Delete</Button>,
+            cellRenderer: params => <Button size="small" onClick={() => deleteCustomer(params.data.links[0].href)}>Delete</Button>,
             width: 120
         }
     ]);
@@ -45,11 +45,11 @@ function CustomerList() {
     }
 
     const deleteCustomer = (url) => {
-        if (window.confirm("Oletko varma ?")) {
-        fetch(url, {method: 'DELETE'}) //lähettää tietokantaan DELETE pyynnön
+        if (window.confirm("Are you sure ?")) {
+        fetch(url, {method: 'DELETE'}) 
         .then(response => {
             if (response.ok)
-            fetchCustomers();    //hakee autot uudelleen, uudelleenrenderöi jotta välittömästi auto poistuu
+            fetchCustomers();    
             else
             throw new Error("Error in DELETE: " + response.statusText);
         })
@@ -57,14 +57,27 @@ function CustomerList() {
     }
     }
 
+    const saveCustomer = (customer) => {
+        fetch('https://traineeapp.azurewebsites.net/api/customers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(customer)
+        })
+        .then(() => fetchCustomers())
+        .catch(err => console.error(err))
+    }
+
 
     return(
         <>
+        <AddCustomer saveCustomer={saveCustomer}/>
         <div className="ag-theme-material" style= {{ width: '90%', height: 700, margin: 'auto'}}>
         <AgGridReact
             rowData={customers}
             columnDefs={columnDefs}
-            pagination={true} //sivutus
+            pagination={true} 
             paginationAutoPageSize = {true}
         />
         </div>
