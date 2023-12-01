@@ -37,7 +37,7 @@ function CustomerList() {
                 </Button>
               </div>
             ),
-            width: 400, // Adjust the width as needed
+            width: 400,
           },
     ]);
 
@@ -96,7 +96,6 @@ function CustomerList() {
 
         const formattedDate = moment(training.date).toISOString();
 
-    // Include the formatted date in the training object
     const trainingData = {
         ...training,
         date: formattedDate

@@ -18,7 +18,7 @@ function TrainingList() {
     //Luo tyhjän taulukon
     const [training, setTraining] = useState([]);
 
-    //Renderöi kerran, hakee asiakkaat
+    
     useEffect(() => {
         fetchTraining();
     }, []);
