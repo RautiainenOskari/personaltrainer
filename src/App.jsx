@@ -3,6 +3,7 @@ import { useState } from "react";
 import CustomerList from './components/customerlist';
 import Etusivu from './components/Etusivu';
 import TrainingList from './components/Traininglist';
+import TrainingCalendar from './components/TrainingCalendar';
 
 function App() {
   const [selectedTab, setSelectedTab] = useState("home");
@@ -18,13 +19,15 @@ function App() {
     <div className="app-container">
     <div className="tabs">
       <button onClick={() => handleTabChange("home")}>Home</button>
-      <button onClick={() => handleTabChange("Customers")}>Customers</button>
-      <button onClick={() => handleTabChange("Trainings")}>Trainings</button>
+      <button onClick={() => handleTabChange("customers")}>Customers</button>
+      <button onClick={() => handleTabChange("trainings")}>Trainings</button>
+      <button onClick={() => handleTabChange("calendar")}>Calendar</button>
     </div>
 
-    {selectedTab === "Home" && <Etusivu />}
-    {selectedTab === "Customers" && <CustomerList />}
-    {selectedTab === "Trainings" && <TrainingList />}
+    {selectedTab === "home" && <Etusivu />}
+    {selectedTab === "customers" && <CustomerList />}
+    {selectedTab === "trainings" && <TrainingList />}
+    {selectedTab === "calendar" && <TrainingCalendar />}
   </div>
   )
   

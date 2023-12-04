@@ -1,3 +1,8 @@
 export default function Etusivu() {
-    return(<h1>Etusivu</h1>)
+    return (
+        <div>
+            <h1>Etusivu</h1>
+            <p>Personal Trainer sivu - Oskari Rautiainen</p>
+        </div>
+    );
 }

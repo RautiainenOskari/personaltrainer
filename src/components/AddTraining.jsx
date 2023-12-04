@@ -16,6 +16,7 @@ export default function AddTraining(data) {
     const [open, setOpen] = React.useState(false);
     const [training, setTraining] = React.useState({
         date: new Date(), activity: '', duration: '', customer: ''})
+    
 
   const handleClickOpen = () => {
     console.log(data.data.firstname);
@@ -40,10 +41,18 @@ export default function AddTraining(data) {
     handleClose();
   }
 
-   const handleDateChange = (date) => {
+  const handleDateChange = (date) => {
+    // Ensure the date part includes both date and time components
+    const updatedDate = new Date(training.date);
+    updatedDate.setFullYear(date.getFullYear());
+    updatedDate.setMonth(date.getMonth());
+    updatedDate.setDate(date.getDate());
+    updatedDate.setHours(date.getHours());
+    updatedDate.setMinutes(date.getMinutes());
+  
     setTraining({
       ...training,
-      date,
+      date: updatedDate,
     });
   };
     
